@@ -7,11 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-      'message', 'user_id'
+      'message', 'name', 'email',
     ];
 
-    //relations
-    public function users(){
-        return $this->belongsTo('App\User');
-    }
 }

@@ -13,6 +13,6 @@ class Category extends Model
     //relations
 
     public function places(){
-        return $this->hasMany('App\Place');
+        return $this->hasMany('App\Models\Place');
     }
 }

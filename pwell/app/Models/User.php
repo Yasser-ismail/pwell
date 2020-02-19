@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'status'
+        'name', 'email', 'password', 'phone', 'status', 'role_id'
     ];
 
     /**
@@ -39,11 +40,25 @@ class User extends Authenticatable
 
     //relations
 
-    public function reviews(){
-        return $this->hasMany('App\Review');
+    public function reviews()
+    {
+        return $this->hasMany('App\ Models\Review');
     }
 
-    public function messages(){
-        return $this->hasMany('App\Message');
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
     }
+
+    //is admin function
+
+    public function isadmin()
+    {
+        if (Auth::user()->role_id == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
 }
